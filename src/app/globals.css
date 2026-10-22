@@ -1,0 +1,364 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #021028;
+  --color-primary-container: #18253e;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #bac6e7;
+  
+  /* Brand Action Blue - sampled from "P" and "D" in official SYPD logo */
+  --color-action-orange: #07438C;
+  --color-action-orange-hover: #05326B;
+  --color-sypd-blue: #07438C;
+  --color-sypd-blue-hover: #05326B;
+  --color-sypd-blue-light: #1D6AE5;
+  
+  /* Brand Secondary Green - sampled from "S" in official SYPD logo */
+  --color-secondary: #6CB739;
+  --color-secondary-dark: #2F680E;
+  --color-secondary-container: #b4f188;
+  --color-secondary-fixed: #85BE5C;
+  --color-secondary-fixed-dim: #6CB739;
+  --color-on-secondary-container: #23520A;
+
+  --color-tertiary: #2A5074;
+  --color-tertiary-dark: #001122;
+  --color-tertiary-container: #002744;
+  --color-tertiary-fixed: #d0e4ff;
+  --color-tertiary-fixed-dim: #a5caf4;
+  
+  --color-surface: #f8f9fa;
+  --color-surface-card: #FFFFFF;
+  --color-surface-container: #edeeef;
+  --color-surface-container-low: #f3f4f5;
+  --color-surface-container-high: #e7e8e9;
+  --color-surface-container-highest: #e1e3e4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #e1e3e4;
+  --color-surface-bright: #f8f9fa;
+  --color-surface-dim: #d9dadb;
+
+  --color-peace-slate: #4A5568;
+  --color-border-subtle: #E2E8F0;
+  --color-on-surface: #191c1d;
+  --color-on-surface-variant: #45474d;
+  --color-outline: #75777e;
+  --color-outline-variant: #c5c6ce;
+
+  --font-inter: 'Inter', sans-serif;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark Mode Theme Variables */
+html.dark {
+  --color-surface: #040c18;
+  --color-surface-card: #09182d;
+  --color-surface-container: #0f223d;
+  --color-surface-container-low: #061324;
+  --color-surface-container-high: #142d50;
+  --color-surface-container-highest: #1a3964;
+  --color-surface-container-lowest: #020710;
+  --color-surface-variant: #102644;
+  --color-surface-bright: #0c1e36;
+  --color-surface-dim: #050d1a;
+
+  --color-peace-slate: #94a3b8;
+  --color-border-subtle: #1e2e46;
+  --color-on-surface: #f8fafc;
+  --color-on-surface-variant: #cbd5e1;
+  --color-outline: #64748b;
+  --color-outline-variant: #334155;
+
+  --color-primary: #021028;
+  --color-primary-container: #0f2342;
+  --color-primary-fixed: #1e3a5f;
+  --color-primary-fixed-dim: #132742;
+
+  --color-action-orange: #60a5fa;
+  --color-action-orange-hover: #93c5fd;
+  --color-sypd-blue: #60a5fa;
+  --color-sypd-blue-hover: #93c5fd;
+  --color-sypd-blue-light: #93c5fd;
+  --color-secondary: #4ade80;
+  --color-secondary-dark: #22c55e;
+  --color-tertiary: #93c5fd;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark Mode Direct High-Priority Overrides (WCAG AA Compliance)               */
+/* -------------------------------------------------------------------------- */
+
+/* Force solid card surfaces to dark slate container in dark mode */
+html.dark .bg-white,
+.dark .bg-white {
+  background-color: #09182d !important;
+}
+
+html.dark .bg-white\/95,
+.dark .bg-white\/95 {
+  background-color: rgba(9, 24, 45, 0.95) !important;
+}
+
+html.dark .bg-white\/90,
+.dark .bg-white\/90 {
+  background-color: rgba(9, 24, 45, 0.9) !important;
+}
+
+html.dark .bg-white\/80,
+.dark .bg-white\/80 {
+  background-color: rgba(9, 24, 45, 0.8) !important;
+}
+
+/* Ensure text-primary is bright readable light text on dark cards */
+html.dark .text-primary,
+.dark .text-primary {
+  color: #f8fafc !important;
+}
+
+/* Ensure hover:text-primary doesn't vanish on hover */
+html.dark .hover\:text-primary:hover,
+.dark .hover\:text-primary:hover {
+  color: #ffffff !important;
+}
+
+/* Ensure kickers, tags, and icons have high contrast on dark backgrounds */
+html.dark .text-action-orange,
+.dark .text-action-orange {
+  color: #60a5fa !important;
+}
+
+html.dark .hover\:text-action-orange:hover,
+.dark .hover\:text-action-orange:hover {
+  color: #93c5fd !important;
+}
+
+html.dark .text-secondary,
+.dark .text-secondary {
+  color: #4ade80 !important;
+}
+
+html.dark .text-tertiary,
+.dark .text-tertiary {
+  color: #93c5fd !important;
+}
+
+/* Ensure borders are subtle navy rather than light grey */
+html.dark .border-border-subtle,
+.dark .border-border-subtle {
+  border-color: #1e2e46 !important;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-inter), 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  body {
+    background-color: #f8f9fa;
+    color: #191c1d;
+    font-family: var(--font-inter), 'Inter', sans-serif;
+    overscroll-behavior: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  html.dark body {
+    background-color: #040c18;
+    color: #f8fafc;
+  }
+}
+
+/* Animations */
+@keyframes heroFadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroScaleIn {
+  0% { opacity: 0; transform: scale(0.96) translateY(16px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes ambientGlowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes shimmerGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseRadar {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px) rotate(-14deg); }
+  50% { transform: translateY(-8px) rotate(-14deg); }
+}
+
+.animate-hero-fade-1 { animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+.animate-hero-fade-2 { animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+.animate-hero-fade-3 { animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+.animate-hero-fade-4 { animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+.animate-hero-fade-5 { animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both; }
+.animate-hero-card   { animation: heroScaleIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+
+/* Infinite Marquee Animation (Right to Left) */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 42s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.ambient-glow {
+  animation: ambientGlowPulse 4s ease-in-out infinite;
+}
+
+.shimmer-bar {
+  background: linear-gradient(90deg, #6CB739 0%, #85BE5C 25%, #07438C 50%, #85BE5C 75%, #6CB739 100%);
+  background-size: 200% 100%;
+  animation: shimmerGradient 3s linear infinite;
+}
+
+.radar-ring {
+  animation: pulseRadar 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Diagonal 3-Pill Unified Slice System */
+.pill-cluster-container {
+  perspective: 1000px;
+}
+
+.pill-stage {
+  animation: gentleFloat 6s ease-in-out infinite;
+  transform: rotate(-14deg);
+  transform-origin: center center;
+}
+
+.pill-bar {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  box-shadow: 0 20px 40px -15px rgba(2, 16, 40, 0.22);
+}
+
+.pill-bar:hover {
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: 0 26px 50px -12px rgba(7, 67, 140, 0.35);
+}
+
+/* Card hover lift */
+.hover-lift-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-lift-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -8px rgba(2, 16, 40, 0.1), 0 6px 16px -4px rgba(2, 16, 40, 0.04);
+}
+
+/* Interactive CTA pulse glow */
+.cta-glow-hover {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+}
+
+.cta-glow-hover:hover {
+  box-shadow: 0 0 24px -2px rgba(7, 67, 140, 0.65);
+}
+
+.cta-glow-hover::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.cta-glow-hover:hover::after {
+  left: 140%;
+  transition: left 0.75s ease-in-out;
+}
+
+/* Header blur and solid on scroll */
+.header-scrolled {
+  background-color: rgba(2, 16, 40, 0.94) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Animation Utilities (fade-in, zoom-in, slide-in for modals & dropdowns)    */
+/* -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn95 {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInFromTop2 {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.zoom-in-95 {
+  animation-name: zoomIn95;
+}
+
+.slide-in-from-top-2 {
+  animation-name: slideInFromTop2;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Accessibility: prefers-reduced-motion (WCAG 2.3.3 / WCAG 2.2.2)            */
+/* -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+    overflow-x: auto !important;
+  }
+  .ambient-glow,
+  .shimmer-bar,
+  .radar-ring,
+  .pill-stage {
+    animation: none !important;
+  }
+}
+
